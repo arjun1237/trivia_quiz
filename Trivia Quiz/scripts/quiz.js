@@ -87,12 +87,16 @@ function prettifyQuestions(data){
     for(var key in data){
         var q = data[key]
         var qObj = new Question()
-        qObj.category = q.category
-        qObj.type = q.type
-        qObj.difficulty = q.difficulty
+        qObj.category = unescape(q.category)
+        qObj.type = unescape(q.type)
+        qObj.difficulty = unescape(q.difficulty)
         qObj.question = unescape(q.question)
-        q.incorrect_answers.map(unescape)
-        qObj.choice = [q.correct_answer, ...q.incorrect_answers]
+        qObj.choice = [q.correct_answer]
+
+        var in_ans = q.incorrect_answers
+        for(var i=0; i<in_ans.length; i++){
+            qObj.choice.push(unescape(in_ans[i]))
+        }
         qObj.answer = unescape(q.correct_answer)
         allQs.push(qObj)
     }
@@ -138,6 +142,7 @@ function setLevel(level){
     levelObj.setAttribute('class', 'level-range ' + level)
 }
 
+var counter = 0
 function setQuestion(question, num){
     var qDiv = document.getElementsByClassName('q-main')[0]
     qDiv.textContent = ''
@@ -150,18 +155,19 @@ function setQuestion(question, num){
     for(var i=0; i<choices.length; i++){
         var input = document.createElement('input')
         var label = document.createElement('label')
+        var choice = unescape(choices[counter++])
 
         input.type = 'radio'
         input.name = 'q' + num
-        input.value = unescape(choices[i])
-        label.textContent = unescape(choices[i])
+        input.value = choice
+        label.textContent = choice
 
-        if(unescape(choices[i]) === unescape(question.attempt)){
+        if(choice === unescape(question.attempt)){
             input.checked = true
         }
 
         input.addEventListener('click', function(){
-            setAttempt(num, choices[i])
+            setAttempt(num, choice)
         })
 
         qDiv.append(input, label)
@@ -169,6 +175,7 @@ function setQuestion(question, num){
             qDiv.append(document.createElement('br'))
         }
     }
+    counter = 0
 }
 
 function changeQuestion(isNext){
@@ -180,14 +187,17 @@ function changeQuestion(isNext){
     if(isNext)
         qNum++
     else{
-        if(qNum === 0){
+        if(qNum <= 1){
             return
         }
         qNum--
     }
     var qs = JSON.parse(localStorage.getItem('questions'))
     var len = qs.length
-    var q = qs[qNum]
+    if(qNum > len){
+        qNum = 1
+    }
+    var q = qs[qNum-1]
     if(qNum !== undefined){
         parseQuestion(q, qNum, len)
     }
@@ -200,4 +210,5 @@ function setAttempt(num, answer){
     }
     var qs = JSON.parse(localStorage.getItem('questions'))
     qs[num-1].attempt = answer
+    localStorage.setItem('questions', JSON.stringify(qs))
 }
