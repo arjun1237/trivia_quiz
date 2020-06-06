@@ -7,7 +7,8 @@ function Question(category, type, difficulty, question, choice, answer, attempt)
     this.question = question
     this.choice = choice
     this.answer = answer
-    this.attempt = attempt
+    if(attempt === undefined)
+        this.attempt = null
 }
 
 function addEvents(){
@@ -15,6 +16,15 @@ function addEvents(){
         loadQuestions()
     else
         displayQuestion()
+    
+    
+    document.getElementById('back-icon').addEventListener('click', function(){
+        changeQuestion(false)
+    })
+
+    document.getElementById('next-icon').addEventListener('click', function(){
+        changeQuestion(true)
+    })
 }
 
 function loadQuestions(){
@@ -40,6 +50,7 @@ function extractQuestions(token, type, difficulty, questions, category){
     if(category !== 'any'){
         href += "&category=" + category
     }
+    href += "&encode=url3986"
     href += "&token=" + token
 
     xhr.open("GET", url + href)
@@ -50,6 +61,7 @@ function extractQuestions(token, type, difficulty, questions, category){
             var code = resp.response_code
             if(code === 0){
                 storeQInLocal(resp.results)
+                displayQuestion()
             }
             else{
                 console.log("Response Code: " + resp.response_code)
@@ -67,10 +79,10 @@ function extractQuestions(token, type, difficulty, questions, category){
 
 function storeQInLocal(resp){
     localStorage.setItem('question-avail', JSON.stringify(true))    
-    localStorage.setItem('questions', JSON.stringify(prettigyQuestions(resp)))
+    localStorage.setItem('questions', JSON.stringify(prettifyQuestions(resp)))
 }
 
-function prettigyQuestions(data){
+function prettifyQuestions(data){
     var allQs = []
     for(var key in data){
         var q = data[key]
@@ -78,11 +90,114 @@ function prettigyQuestions(data){
         qObj.category = q.category
         qObj.type = q.type
         qObj.difficulty = q.difficulty
-        qObj.question = q.question
+        qObj.question = unescape(q.question)
+        q.incorrect_answers.map(unescape)
         qObj.choice = [q.correct_answer, ...q.incorrect_answers]
-        qObj.answer = q.correct_answer
-        qObj.attempt = false
+        qObj.answer = unescape(q.correct_answer)
         allQs.push(qObj)
     }
     return allQs
+}
+
+function displayQuestion(num){
+    var qAvail = JSON.parse(localStorage.getItem('question-avail'))
+    if(qAvail){
+        var questions = JSON.parse(localStorage.getItem('questions'))
+        if(num === undefined){
+            for(var q in questions){
+                if(questions[q].attempt === null){
+                    parseQuestion(questions[q], Number(q)+1, questions.length)
+                    return
+                }
+            }
+        }
+        else{
+            if(questions[num-1] !== undefined && questions[num] !== null){
+                parseQuestion(questions[num-1], Number(num), questions.length)
+                return
+            }
+        }
+        localStorage.removeItem('question-avail')
+        location.href = 'finish.html'
+    }
+}
+
+function parseQuestion(question, num, len){
+    setQNumber(num, len)
+    setLevel(question.difficulty)
+    setQuestion(question, num)
+}
+
+function setQNumber(num, len){
+    document.getElementById('q-num').textContent = num
+    document.getElementById('q-total').textContent = len
+}
+
+function setLevel(level){
+    var levelObj = document.getElementsByClassName('level-range')[0]
+    levelObj.setAttribute('class', 'level-range ' + level)
+}
+
+function setQuestion(question, num){
+    var qDiv = document.getElementsByClassName('q-main')[0]
+    qDiv.textContent = ''
+    qDiv.setAttribute('data-qNum', num)
+    var p = document.createElement('p')
+    p.innerHTML = unescape(question.question)
+    qDiv.append(p)
+
+    var choices = question.choice
+    for(var i=0; i<choices.length; i++){
+        var input = document.createElement('input')
+        var label = document.createElement('label')
+
+        input.type = 'radio'
+        input.name = 'q' + num
+        input.value = unescape(choices[i])
+        label.textContent = unescape(choices[i])
+
+        if(unescape(choices[i]) === unescape(question.attempt)){
+            input.checked = true
+        }
+
+        input.addEventListener('click', function(){
+            setAttempt(num, choices[i])
+        })
+
+        qDiv.append(input, label)
+        if(choices.length-1 !== i){
+            qDiv.append(document.createElement('br'))
+        }
+    }
+}
+
+function changeQuestion(isNext){
+    var qDiv = document.getElementsByClassName('q-main')[0]
+    var qNum = Number(qDiv.getAttribute('data-qNum'))
+    if(qNum === null || isNaN(qNum)){
+        qNum = 0
+    }
+    if(isNext)
+        qNum++
+    else{
+        if(qNum === 0){
+            return
+        }
+        qNum--
+    }
+    var qs = JSON.parse(localStorage.getItem('questions'))
+    var len = qs.length
+    var q = qs[qNum]
+    if(qNum !== undefined){
+        parseQuestion(q, qNum, len)
+    }
+}
+
+function setAttempt(num, answer){
+    num = Number(num)
+    if(num === null || isNaN(num)){
+        return
+    }
+    var qs = JSON.parse(localStorage.getItem('questions'))
+    qs[num-1].attempt = answer
 }

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started</title>
-    <link rel="stylesheet" href="./styles/quiz.css">
+    <title>TRIVIA QUIZ</title>
     <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/quiz.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -18,28 +18,25 @@
     <div class="loading"></div>
     <div class="question-part">
         <div class="q-details">
-            <h3>Question: <span>3</span>/10</h3>
+            <h3>Question: <span id="q-num"></span>/<span id="q-total"></span></h3>
             <div class="q-level">
                 <h3>level: </h3>
                 <div class="level">
-                    <div class="level-range hard"></div>
+                    <div class="level-range"></div>
                 </div>
             </div>
             <div class="clear"></div>
         </div>
-        <div class="q-main" data-q-no='3'>
-            <p>What does the computer software acronym JVM stand for?</p>
-            <input type="radio" name="gender" value="male">
-            <label>Male</label><br>
-            <input type="radio" name="gender" value="female">
-            <label>Female</label><br>
-            <input type="radio" name="gender" value="other">
-            <label>Other</label>
+        <div class="q-main">
         </div>
         <div class="play-btn-main">
             <div class="play-btn"><i class="fa fa-play flip-horizontal" id="back-icon"></i></div>
             <div class="play-btn middle-space"></div>
             <div class="play-btn"><i class="fa fa-play" id="next-icon"></i></div>
+        </div>
+        <div class="mid-height"></div>
+        <div>
+            <div class="button submit-all">SUBMIT ALL</div>
         </div>
     </div>
     <script src="./scripts/common.js"></script>

@@ -73,7 +73,7 @@ body{
 
 .q-main{
     margin-top: 40px;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .play-btn i{
@@ -92,4 +92,12 @@ body{
 
 .middle-space{
     width: 40px;
+}
+
+label{
+    padding-left: 10px;
+}
+
+div > .submit-all{
+    padding: 0px 40px;
 }
