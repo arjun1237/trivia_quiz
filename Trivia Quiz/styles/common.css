@@ -73,3 +73,11 @@ h1, h2{
     color: #f3e9d2;
     background-color: #114b5f;
 }
+
+.flip-horizontal{
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+}
