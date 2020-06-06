@@ -50,5 +50,5 @@ Error Page Contents:
 
 [![N|Solid](https://raw.githubusercontent.com/arjun1237/masai-sprint-3/master/Trivia%20Quiz/resources/refresh.PNG)](https://nodesource.com/products/nsolid)
 
-Error Page Contents:
+Error Button Feature:
   - On clicking the refrsh button, which is common feature in all the pages, it delets all the local storage and takes you back to start of the page.
