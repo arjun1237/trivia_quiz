@@ -35,6 +35,8 @@ function checkSession(){
 
 function deleteSession(){
     localStorage.removeItem('session_details')
+    localStorage.removeItem('question-avail')
+    localStorage.removeItem('questions')
 }
 
 function goToHome(){

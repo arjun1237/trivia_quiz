@@ -41,6 +41,7 @@ function storeSessionDetails(sessionObj){
                 return
             }
             console.log("Response Code: " + resp.response_code)
+            console.log("Response Message: " + resp.response_message)
         }
         else{
             console.log("Status: " + xhr.status)
