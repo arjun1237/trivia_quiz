@@ -171,7 +171,7 @@ function setQuestion(question, num){
         if(choice === unescape(question.attempt)){
             input.checked = true
         }
-        addChoices.call(choice, input, num)
+        addChoices.call(choices, input, num, i)
 
         qDiv.append(input, label)
         if(choices.length-1 !== i){
@@ -180,11 +180,10 @@ function setQuestion(question, num){
     }
 }
 
-function addChoices(input, num){
+function addChoices(input, num, i){
     var that = this
-    that = Object.values(that).join('')
     input.addEventListener('click', function(){
-        setAttempt(num, that)
+        setAttempt(num, that[i])
     })
 }
 
