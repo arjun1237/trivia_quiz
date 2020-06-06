@@ -1,5 +1,3 @@
-# masai-sprint-3
-
 # TRIVIA QUIZ
 
 [![N|Solid](https://raw.githubusercontent.com/arjun1237/masai-sprint-3/master/Trivia%20Quiz/resources/trivia%20logo.PNG)](https://nodesource.com/products/nsolid)
