@@ -142,7 +142,6 @@ function setLevel(level){
     levelObj.setAttribute('class', 'level-range ' + level)
 }
 
-var counter = 0
 function setQuestion(question, num){
     var qDiv = document.getElementsByClassName('q-main')[0]
     qDiv.textContent = ''
@@ -155,7 +154,7 @@ function setQuestion(question, num){
     for(var i=0; i<choices.length; i++){
         var input = document.createElement('input')
         var label = document.createElement('label')
-        var choice = unescape(choices[counter++])
+        var choice = unescape(choices[i])
 
         input.type = 'radio'
         input.name = 'q' + num
@@ -165,17 +164,21 @@ function setQuestion(question, num){
         if(choice === unescape(question.attempt)){
             input.checked = true
         }
-
-        input.addEventListener('click', function(){
-            setAttempt(num, choice)
-        })
+        addChoices.call(choice, input, num)
 
         qDiv.append(input, label)
         if(choices.length-1 !== i){
             qDiv.append(document.createElement('br'))
         }
     }
-    counter = 0
+}
+
+function addChoices(input, num){
+    var that = this
+    that = Object.values(that).join('')
+    input.addEventListener('click', function(){
+        setAttempt(num, that)
+    })
 }
 
 function changeQuestion(isNext){
