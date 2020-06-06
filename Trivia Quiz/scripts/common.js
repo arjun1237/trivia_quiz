@@ -33,7 +33,8 @@ function checkSession(){
             }
         }
         else{
-            if(!href.endsWith('quiz.html')){
+            if(!href.endsWith('quiz.html') && !href.endsWith('error.html')){
+                var qs = Number(session.questions)
                 location.href = 'quiz.html'
             }
         }

@@ -65,12 +65,13 @@ function extractQuestions(token, type, difficulty, questions, category){
         if(xhr.status === 200){
             var code = resp.response_code
             if(code === 0){
-                storeQInLocal(resp.results)
+                storeQInLocal(resp.results, questions)
                 displayQuestion()
             }
             else{
-                console.log("Response Code: " + resp.response_code)
+                console.log("Response Code: " + code)
                 console.log("Response Message: " + resp.response_message)
+                location.href = 'error.html'
             }
         }
         else{
@@ -82,7 +83,7 @@ function extractQuestions(token, type, difficulty, questions, category){
     }
 }
 
-function storeQInLocal(resp){
+function storeQInLocal(resp, qs){
     localStorage.setItem('question-avail', JSON.stringify(true))    
     localStorage.setItem('questions', JSON.stringify(prettifyQuestions(resp)))
 }
