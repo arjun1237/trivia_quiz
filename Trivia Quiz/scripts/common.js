@@ -12,9 +12,11 @@ function addEvents(){
 
 function checkSession(){
     var session = JSON.parse(localStorage.getItem('session_details'))
+    var submit = JSON.parse(localStorage.getItem('quiz-submit'))
     var href = location.href
     if(session === null){
         if(!href.endsWith('index.html')){
+            deleteSession()
             location.href = 'index.html'
         }
     }
@@ -23,6 +25,11 @@ function checkSession(){
             deleteSession()
             if(!href.endsWith('index.html')){
                 location.href = 'index.html'
+            }
+        }
+        else if(submit){
+            if(!href.endsWith('finish.html')){
+                location.href = 'finish.html'
             }
         }
         else{
@@ -37,6 +44,7 @@ function deleteSession(){
     localStorage.removeItem('session_details')
     localStorage.removeItem('question-avail')
     localStorage.removeItem('questions')
+    localStorage.removeItem('quiz-submit')
 }
 
 function goToHome(){

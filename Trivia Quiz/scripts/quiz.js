@@ -25,6 +25,11 @@ function addEvents(){
     document.getElementById('next-icon').addEventListener('click', function(){
         changeQuestion(true)
     })
+
+    document.getElementsByClassName('submit-all')[0].addEventListener('click', function(){
+        localStorage.setItem('quiz-submit', JSON.stringify(true))
+        location.href = 'finish.html'
+    })
 }
 
 function loadQuestions(){
@@ -114,6 +119,7 @@ function displayQuestion(num){
                     return
                 }
             }
+            parseQuestion(questions[0], 1, questions.length)
         }
         else{
             if(questions[num-1] !== undefined && questions[num] !== null){
@@ -121,8 +127,8 @@ function displayQuestion(num){
                 return
             }
         }
-        localStorage.removeItem('question-avail')
-        location.href = 'finish.html'
+        // localStorage.removeItem('question-avail')
+        // location.href = 'finish.html'
     }
 }
 
