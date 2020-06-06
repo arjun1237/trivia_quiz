@@ -11,7 +11,7 @@
 <body>
     <div class="head">
         <h1>TRIVIA QUIZ</h1>
-        <p>refresh</p>
+        <p id="refresh">refresh</p>
         <div class="clear"></div>
     </div>
     <div class="start">
@@ -26,42 +26,32 @@
                     <td><label for="category">CATEGORY</label></td>
                     <td>
                         <select name="category" id="category">
-                            <option value="any">ANY</option>
                         </select>
                     </td>
                     <td><label for="difficulty">DIFFICULTY</label></td>
                     <td>
                         <select name="difficulty" id="difficulty">
-                            <option value="any">ANY</option>
-                            <option value="easy">EASY</option>
-                            <option value="medium">MEDIUM</option>
-                            <option value="hard">HARD</option>
                         </select>
                     </td>
                 </tr>
+
                 <tr>
                     <td><label for="type">TYPE</label></td>
                     <td>
                         <select name="type" id="type">
-                            <option value="any">ANY</option>
-                            <option value="choice">MULTIPLE CHOICE</option>
-                            <option value="boolean">TRUE / FALSE</option>
                         </select>
                     </td>
                     <td><label for="questions">No of QUESTIONS</label></td>
                     <td>
                         <select name="questions" id="questions">
-                            <option value="q50">50 (MAX)</option>
-                            <option value="q35">35</option>
-                            <option value="q25">25</option>
-                            <option value="q20">20</option>
                         </select>
                     </td>
                 </tr>
             </table>
-            <input type="submit" value="START QUIZ" class="button">
+            <input type="submit" value="START QUIZ" class="button" id="startQuiz">
         </form>
     </div>
+    <script src="./scripts/common.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
