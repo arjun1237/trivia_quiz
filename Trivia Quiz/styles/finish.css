@@ -91,3 +91,9 @@ thead{
 .no-attempt-color{
     background-color: #f9bf8f;
 }
+
+#total-score{
+    background-color: #1a936f;
+    color: #f3e9d2;
+    padding: 0 10px;
+}

@@ -5,7 +5,12 @@ function addEvents(){
     var percent = Math.round(score.score / score.len * 100)
     displayPercent(percent)
     displayCategoryWise(score.catScore)
+    displayResult(score.score, score.len)
     displayQuestions()
+}
+
+function displayResult(score, total){
+    document.getElementById('total-score').textContent = score + "/" + total
 }
 
 function displayPercent(percent){
