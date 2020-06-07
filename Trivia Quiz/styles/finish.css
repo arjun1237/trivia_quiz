@@ -22,8 +22,8 @@
 }
 
 .g-middle{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 150px;
     background-color: #1a2639;
 }
 
@@ -80,14 +80,14 @@ thead{
     color: #f3e9d2;
 }
 
-tbody tr td:last-of-type{
+.right-ans-color{
     background-color: #88d498;
 }
 
-tbody tr:nth-of-type(3) td:last-of-type{
+.wrong-ans-color{
     background-color: #e2434b;
 }
 
-tbody tr:nth-of-type(5) td:last-of-type{
+.no-attempt-color{
     background-color: #f9bf8f;
 }
