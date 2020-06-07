@@ -42,6 +42,16 @@ Error Page Contents:
   - Error page is displayed in case the number of questions are enough. This also happens if all the questions are exhausted based on session details.
   - On clicking start button, it triggers refresh button (its actions are described below)
 
+### Finish Page:
+
+[![Score on Finish Page](https://raw.githubusercontent.com/arjun1237/masai-sprint-3/master/Trivia%20Quiz/resources/score.PNG)](https://nodesource.com/products/nsolid)
+
+[![Score on Finish Page](https://raw.githubusercontent.com/arjun1237/masai-sprint-3/master/Trivia%20Quiz/resources/answers.PNG)](https://nodesource.com/products/nsolid)
+
+Finish Page Contents:
+  - The finish page shows the final result of the quiz by user. The scores are displayed by percentage, total, as well as category wise score, with comprehensice analysis of the quiz
+  - The same page also has a tabular data of the attempted questions - what were the right answers and what were the wrong ones.
+
 ### Refresh Button:
 
 [![Refresh Button](https://raw.githubusercontent.com/arjun1237/masai-sprint-3/master/Trivia%20Quiz/resources/refresh.PNG)](https://nodesource.com/products/nsolid)
