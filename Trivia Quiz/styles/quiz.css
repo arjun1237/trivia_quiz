@@ -96,6 +96,7 @@ body{
 
 label{
     padding-left: 10px;
+    cursor: pointer;
 }
 
 div > .submit-all{

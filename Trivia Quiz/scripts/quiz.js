@@ -97,12 +97,16 @@ function prettifyQuestions(data){
         qObj.type = unescape(q.type)
         qObj.difficulty = unescape(q.difficulty)
         qObj.question = unescape(q.question)
-        qObj.choice = [q.correct_answer]
+        qObj.choice = []
 
         var in_ans = q.incorrect_answers
-        for(var i=0; i<in_ans.length; i++){
+        var len = in_ans.length
+        for(var i=0; i<len; i++){
             qObj.choice.push(unescape(in_ans[i]))
         }
+        var random = Math.round(Math.random() * len)
+        qObj.choice.splice(random, 0, unescape(q.correct_answer))
+        
         qObj.answer = unescape(q.correct_answer)
         allQs.push(qObj)
     }
@@ -172,12 +176,20 @@ function setQuestion(question, num){
             input.checked = true
         }
         addChoices.call(choices, input, num, i)
+        connectLabel.call(label, input)
 
         qDiv.append(input, label)
         if(choices.length-1 !== i){
             qDiv.append(document.createElement('br'))
         }
     }
+}
+
+function connectLabel(input){
+    var that = this
+    that.addEventListener('click', function(){
+        input.click()
+    })
 }
 
 function addChoices(input, num, i){
