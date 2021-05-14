@@ -58,6 +58,7 @@ h1, h2{
 .button{
     background-color: #f3e9d2;
     width: fit-content;
+    width: -moz-fit-content;
     margin: 0 auto;
     font-size: 40px;
     padding: 15px 50px;
